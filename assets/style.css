@@ -55,3 +55,17 @@ footer{border-top:1px solid var(--line);padding:22px 32px;font-family:var(--mono
   .card{border:none;background:none;padding:0}
   h2{margin-top:18px}
 }
+
+/* ---- home page sections ---- */
+.domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:24px}
+.domain{background:var(--bg);padding:20px;text-decoration:none;color:var(--text);display:block}
+.domain:hover{background:var(--panel)}
+.domain .meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:6px}
+.domain h3{font-size:15px;margin-bottom:6px}
+.domain p{font-size:13px;margin:0}
+.card h3 a{color:var(--text);text-decoration:none}
+.card h3 a:hover{color:var(--accent)}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:24px}
+.skill-group{background:var(--bg);padding:20px}
+.skill-group .meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:8px}
+.skill-group p{font-size:14px;margin:0;max-width:none}

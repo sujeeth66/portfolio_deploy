@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>G. Sujeeth Madhav · Full-Stack Developer & AI Engineer</title>
-<meta name="description" content="Portfolio of G. Sujeeth Madhav: full-stack and AI projects, a deployed school automation tool, robotics, and 3D animation.">
+<meta name="description" content="Portfolio of G. Sujeeth Madhav: AI-driven applications, a deployed school automation tool, robotics, embedded systems, game development, and 3D animation.">
 <link rel="stylesheet" href="assets/style.css">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -20,38 +20,105 @@
   </nav>
 </header>
 <main>
+
+  <!-- HERO -->
   <div class="pill">● Fresher · Open to roles</div>
   <div class="tag-line">Full-Stack Developer &amp; AI Engineer · Hyderabad, Telangana</div>
   <h1>I build software that people actually use.</h1>
-  <p class="lead">B.Tech graduate (2026, GPA 8.5/10.0) from Holy Mary Institute of Technology and Science. My deployed work includes a tool that fills government school marks portals, a game framework that uses an LLM to generate content, and a robotic arm I built and programmed from scratch.</p>
+  <p class="lead">B.Tech CSE (AI &amp; ML) graduate, 2026, GPA 8.5/10.0, from Holy Mary Institute of Technology and Science. I work across AI applications, embedded hardware, robotics, and game development, and my deployed tool is used by government school teachers.</p>
 
   <div class="stats">
     <div class="stat"><b>5</b><span>Projects built</span></div>
-    <div class="stat"><b>1</b><span>Hackathon / course</span></div>
+    <div class="stat"><b>1</b><span>Hackathon-cum-course</span></div>
     <div class="stat"><b>1</b><span>Live tool in use</span></div>
   </div>
 
-  <h2>Featured</h2>
-  <div class="card">
-    <div class="meta">PROJECT · DEPLOYED · IN USE</div>
-    <h3>Marks Automation for a Government Primary School</h3>
-    <p>A browser extension and a hosted server that take a school's student roster from the government marks portal, build the marks sheets teachers fill in, and then enter the marks back into the portal. Teachers write on printed sheets. Scanning reads the handwriting, and any value with low confidence is highlighted so the teacher can correct it by hand.</p>
-    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Chrome Extension</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">Render</span></div>
-    <div class="links"><a href="projects.html#marks">Details →</a></div>
-  </div>
-  <div class="card">
-    <div class="meta">PROJECT · HARDWARE + CV</div>
-    <h3>3-DOF Robotic Arm</h3>
-    <p>My first robot build. I derived the inverse kinematics by hand using the DH parameter method, wrote a custom library that converts target coordinates into servo angles, and controlled the arm from a laptop with hand tracking and a joystick.</p>
-    <div class="tags"><span class="tag">Raspberry Pi 3B+</span><span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Inverse Kinematics</span></div>
-    <div class="links"><a href="projects.html#arm">Details →</a></div>
+  <!-- DOMAINS -->
+  <h2>What I work on</h2>
+  <div class="domains">
+    <a class="domain" href="projects.html#rpg">
+      <div class="meta">AI · GAME DEV</div>
+      <h3>LLM-driven games</h3>
+      <p>Maps, NPCs, quests, and items generated as structured data and executed by a Godot engine.</p>
+    </a>
+    <a class="domain" href="projects.html#marks">
+      <div class="meta">AI · GOVTECH</div>
+      <h3>Automation for public systems</h3>
+      <p>Browser extension, hosted server, and handwriting scanning for a government school portal.</p>
+    </a>
+    <a class="domain" href="projects.html#arm">
+      <div class="meta">ROBOTICS · CV</div>
+      <h3>Robotics &amp; computer vision</h3>
+      <p>A 3-DOF arm with inverse kinematics derived by hand, controlled by hand tracking and a gamepad.</p>
+    </a>
+    <a class="domain" href="projects.html#password">
+      <div class="meta">EMBEDDED</div>
+      <h3>Hardware &amp; access control</h3>
+      <p>An ESP32 device that shows one-time passwords on an LCD, expiring after 10 seconds.</p>
+    </a>
+    <a class="domain" href="3d-work.html">
+      <div class="meta">CREATIVE · 3D</div>
+      <h3>3D modeling &amp; animation</h3>
+      <p>Modeling, animation, and VFX published on YouTube and Instagram.</p>
+    </a>
   </div>
 
-  <h2>Also</h2>
-  <p>I also do <a href="3d-work.html">3D modeling and animation</a>, with work published on YouTube and Instagram. My <a href="blog/index.html">blog</a> has notes on what I build and how.</p>
+  <!-- PROJECTS TEASER -->
+  <h2>Selected projects</h2>
+  <div class="card">
+    <div class="meta">DEPLOYED · IN USE IN A PILOT</div>
+    <h3><a href="projects.html#marks">Marks Automation for a Government Primary School</a></h3>
+    <p>Reads a school's roster from the government portal, builds printed marks sheets, scans the completed sheets, and enters the marks back into the portal. Low-confidence values are highlighted for manual correction.</p>
+    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">Render</span></div>
+  </div>
+  <div class="card">
+    <div class="meta">CAPSTONE · PROOF OF CONCEPT</div>
+    <h3><a href="projects.html#rpg">Dynamic AI-Driven RPG Game Framework</a></h3>
+    <p>A Godot game where an LLM generates content as JSON, which the engine executes deterministically. Includes procedural maps, dependency-ordered NPC generation, and a vector database for long-term story memory.</p>
+    <div class="tags"><span class="tag">Godot</span><span class="tag">Flask</span><span class="tag">LangChain</span><span class="tag">Vector DB</span></div>
+  </div>
+  <div class="card">
+    <div class="meta">HARDWARE + CV</div>
+    <h3><a href="projects.html#arm">3-DOF Robotic Arm</a></h3>
+    <p>3D-printed arm on a Raspberry Pi 3B+, with a custom inverse-kinematics library and two control modes: hand tracking and a gamepad.</p>
+    <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">OpenCV</span></div>
+  </div>
+  <div class="card">
+    <div class="meta">EMBEDDED</div>
+    <h3><a href="projects.html#password">Dynamic Password Generator</a></h3>
+    <p>An ESP32 device that generates one-time, 10-second passwords on an LCD. Known limitations, such as plain HTTP, are documented as future work.</p>
+    <div class="tags"><span class="tag">ESP32</span><span class="tag">LCD</span></div>
+  </div>
+  <p><a href="projects.html">All projects →</a></p>
 
+  <!-- SKILLS -->
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill-group">
+      <div class="meta">PROGRAMMING</div>
+      <p>Python · JavaScript · SQL (MySQL) · HTML · Data Structures &amp; Algorithms</p>
+    </div>
+    <div class="skill-group">
+      <div class="meta">AI / ML</div>
+      <p>LangChain · LLM integration (Groq) · Vector embeddings (HuggingFace) · TensorFlow · OpenCV · AprilTags</p>
+    </div>
+    <div class="skill-group">
+      <div class="meta">SYSTEMS &amp; TOOLS</div>
+      <p>Flask · Godot / GDScript · Raspberry Pi · ESP32 · Git / GitHub · Browser extension development · Render deployment</p>
+    </div>
+  </div>
+
+  <!-- 3D TEASER -->
+  <h2>Beyond code</h2>
+  <p>I also model and animate in 3D. Visual effects and animation work is published on <a href="3d-work.html">YouTube and Instagram</a>.</p>
+
+  <!-- BLOG TEASER -->
+  <p>Notes on how I build things are in the <a href="blog/index.html">blog</a>.</p>
+
+  <!-- CONTACT -->
   <h2>Contact</h2>
   <p>Email <a href="mailto:sujeethmadhav.ganji@gmail.com">sujeethmadhav.ganji@gmail.com</a> · <a href="https://www.linkedin.com/in/sujeeth-madhav-9a50162b7">LinkedIn</a> · <a href="https://github.com/sujeeth66">GitHub</a></p>
+
 </main>
 <footer><span>© <span id="year">2026</span> G. Sujeeth Madhav</span><span>Hyderabad, Telangana</span></footer>
 <script src="assets/site.js"></script>
