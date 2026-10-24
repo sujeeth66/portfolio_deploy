@@ -69,3 +69,10 @@ footer{border-top:1px solid var(--line);padding:22px 32px;font-family:var(--mono
 .skill-group{background:var(--bg);padding:20px}
 .skill-group .meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:8px}
 .skill-group p{font-size:14px;margin:0;max-width:none}
+
+/* ---- 3D reel ---- */
+.reel{border:1px solid var(--line);background:var(--panel);margin-bottom:24px}
+.reel video{display:block;width:100%;max-height:70vh;background:#000}
+.reel-caption{padding:16px 20px}
+.reel-caption .meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:4px}
+.reel-caption p{font-size:14px;margin:0}
