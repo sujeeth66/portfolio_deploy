@@ -15,7 +15,7 @@
     <a href="projects.html">Projects</a>
     <a href="3d-work.html">3D Work</a>
     <a href="blog/index.html">Blog</a>
-    <a href="resume.html">Resume</a>
+    <a href="resume.pdf">Resume</a>
   </nav>
 </header>
 <main>
@@ -24,18 +24,18 @@
   <p class="lead">Five projects, listed by how much I'd want you to look at them first.</p>
 
   <div class="card" id="marks">
-    <div class="meta">01 · DEPLOYED · IN USE IN A PILOT</div>
+    <div class="meta">01 · IN USE IN A PILOT</div>
     <h3>Marks Automation for a Government Primary School</h3>
     <p>My father is a headmaster at a rural government primary school, and the marks for each subject were kept in separate notebooks. Entering them into the government portal meant searching each student across every register. I built a pipeline to remove that work.</p>
     <ul>
-      <li>A browser extension reads the class, section, and student roster from the portal.</li>
+      <li>A browser extension reads the class metadata, and student roster from the portal.</li>
       <li>A server hosted on Render generates printable marks sheets per subject and reads the completed sheets back.</li>
       <li>Scanning extracts the handwritten values. Any value with low confidence is highlighted so the teacher can correct it manually.</li>
       <li>The extracted data is converted to JSON and filled into the portal automatically. I ran it against the real portal.</li>
     </ul>
     <p>Teachers have been using it in a pilot. Their feedback so far is that they can write on the printed sheets without extra time, and the scanning removes the re-typing step. The product is meant to be free for government teachers, and I plan to keep maintaining it.</p>
     <div class="tags"><span class="tag">JavaScript</span><span class="tag">Browser Extension</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">Render</span><span class="tag">Excel</span></div>
-    <div class="links"><a href="https://github.com/sujeeth66">GitHub ↗</a> <span class="todo">[add repo link if public]</span></div>
+    <div class="links"><a href="https://github.com/sujeeth66/marks_automation_pipeline_server">GitHub ↗</a> </div>
   </div>
 
   <div class="card" id="rpg">
@@ -50,13 +50,13 @@
     </ul>
     <p>The Flask backend uses LangChain, Groq, and HuggingFace embeddings. Enemy and sprite generation were left as future work, because I didn't find a free image generator that produced consistent animation frames.</p>
     <div class="tags"><span class="tag">Godot</span><span class="tag">Game Dev</span><span class="tag">Flask</span><span class="tag">LangChain</span><span class="tag">Groq</span><span class="tag">Vector DB</span></div>
-    <div class="links"><a href="https://github.com/sujeeth66">GitHub ↗</a> <span class="todo">[add repo link]</span></div>
+    <div class="links"><a href="https://github.com/sujeeth66/AI-game">GitHub ↗</a> </div>
   </div>
 
   <div class="card" id="arm">
     <div class="meta">03 · HARDWARE + COMPUTER VISION</div>
     <h3>3-DOF Robotic Arm</h3>
-    <p>My first robot build. I 3D-printed the parts and drove the servos from a Raspberry Pi 3B+, which runs on a 3V AC-to-DC supply.</p>
+    <p>My first robot build. I 3D-printed the parts, powered the servos through a 3V AC-to-DC converter, and controlled everything from a Raspberry Pi 3B+.</p>
     <ul>
       <li>No existing library fit the build, so I derived the inverse kinematics myself using the DH parameter method, working through it in Excel.</li>
       <li>I wrote a local Python library that converts target coordinates into servo angles.</li>

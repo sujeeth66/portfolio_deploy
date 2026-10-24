@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post · G. Sujeeth Madhav</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <a class="brand" href="../index.html">SUJEETH<span>.</span>MADHAV</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../3d-work.html">3D Work</a>
+    <a href="index.html">Blog</a>
+    <a href="../resume.pdf">Resume</a>
+  </nav>
+</header>
+<main>
+  <p class="noprint"><a href="index.html">← All posts</a></p>
+  <article class="prose" id="post"><p>Loading…</p></article>
+</main>
+<footer><span>© <span id="year">2026</span> G. Sujeeth Madhav</span><span></span></footer>
+<script src="../assets/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script>
+  const slug = new URLSearchParams(location.search).get('slug');
+  const post = document.getElementById('post');
+  if (!slug || !/^[a-z0-9-]+$/.test(slug)) {
+    post.innerHTML = '<p>Post not found.</p>';
+  } else {
+    Promise.all([
+      fetch('posts/index.json').then(r => r.json()),
+      fetch('posts/' + slug + '.md').then(r => { if (!r.ok) throw new Error(); return r.text(); })
+    ])
+      .then(([index, md]) => {
+        const info = index.find(p => p.slug === slug) || {};
+        document.title = (info.title || 'Post') + ' · G. Sujeeth Madhav';
+        post.innerHTML = '<div class="tag-line"></div><h1></h1>' + marked.parse(md);
+        post.querySelector('.tag-line').textContent = info.date || '';
+        post.querySelector('h1').textContent = info.title || slug;
+      })
+      .catch(() => { post.innerHTML = '<p>Post not found.</p>'; });
+  }
+</script>
+</body>
+</html>
