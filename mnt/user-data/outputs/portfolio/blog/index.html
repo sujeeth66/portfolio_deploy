@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog · G. Sujeeth Madhav</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <a class="brand" href="../index.html">SUJEETH<span>.</span>MADHAV</a>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../3d-work.html">3D Work</a>
+    <a href="index.html">Blog</a>
+    <a href="../resume.html">Resume</a>
+  </nav>
+</header>
+<main>
+  <div class="tag-line">Blog</div>
+  <h1>Notes from building</h1>
+  <p class="lead">How I built things, what broke, and what I'd do differently.</p>
+  <div class="post-list" id="posts"><p>Loading posts…</p></div>
+</main>
+<footer><span>© <span id="year">2026</span> G. Sujeeth Madhav</span><span></span></footer>
+<script src="../assets/site.js"></script>
+<script>
+  // Posts are listed in posts/index.json. Entries with "draft": true are hidden.
+  fetch('posts/index.json')
+    .then(r => r.json())
+    .then(posts => {
+      const list = document.getElementById('posts');
+      const visible = posts.filter(p => !p.draft).sort((a, b) => b.date.localeCompare(a.date));
+      if (!visible.length) { list.innerHTML = '<p>No posts yet.</p>'; return; }
+      list.innerHTML = '';
+      visible.forEach(p => {
+        const a = document.createElement('a');
+        a.className = 'post';
+        a.href = 'post.html?slug=' + encodeURIComponent(p.slug);
+        a.innerHTML = '<div class="date"></div><h3></h3><div class="summary"></div>';
+        a.querySelector('.date').textContent = p.date;
+        a.querySelector('h3').textContent = p.title;
+        a.querySelector('.summary').textContent = p.summary;
+        list.appendChild(a);
+      });
+    })
+    .catch(() => { document.getElementById('posts').innerHTML = '<p>Could not load posts.</p>'; });
+</script>
+</body>
+</html>
