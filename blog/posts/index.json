@@ -2,8 +2,15 @@
   {
     "slug": "how-the-marks-pipeline-works",
     "title": "How the marks pipeline works",
-    "date": "2026-10-20",
+    "date": "20-10-2026",
     "summary": "Replacing a notebook-to-portal workflow with a browser extension, a hosted server, and handwriting scanning.",
+    "draft": false
+  },
+  {
+    "slug": "publishing-the-ai-game-demo",
+    "title": "Publishing the AI game demo",
+    "date": "29-10-2026",
+    "summary": "What I cut to ship Echoloom on itch.io, how I tested without an LLM, and what playtesters and I still need to fix.",
     "draft": false
   }
 ]

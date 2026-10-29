@@ -15,3 +15,5 @@ Teachers at my father's school kept marks in separate notebooks, one per subject
 2. Ensuring the system was user-friendly and didn't require teachers to change their habits.
 3. Making sure the system was secure and didn't expose any sensitive data was also a challenge.
 4. Making the UI intuitive and easy to use since most of the users were not tech-savvy.
+
+Watch the tutorial: [Teachers Marks Entry Extension Guide](https://www.youtube.com/watch?v=vxWaMSW1dyw)

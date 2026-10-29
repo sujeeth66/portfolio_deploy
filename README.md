@@ -7,7 +7,6 @@ Static site for GitHub Pages. No build step.
 - `index.html`: home page
 - `projects.html`: project details
 - `3d-work.html`: 3D modeling and animation
-- `resume.html`: printable resume (Ctrl+P, Save as PDF)
 - `blog/index.html`: blog list
 - `blog/post.html?slug=...`: single post viewer
 - `blog/posts/index.json`: post list (title, date, summary, slug, draft)
@@ -17,9 +16,8 @@ Static site for GitHub Pages. No build step.
 ## Before publishing
 
 Search for `[` and `todo` in the files and fill in the placeholders:
-- YouTube and Instagram links (`3d-work.html`, `resume.html`)
+- YouTube and Instagram links (`3d-work.html`)
 - GitHub repo links for each project (`projects.html`)
-- Branch name and hackathon year (`resume.html`)
 - Anything marked `[confirm]`
 
 ## Adding a blog post
