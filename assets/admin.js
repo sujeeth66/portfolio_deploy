@@ -2,14 +2,16 @@ import { db } from './db.js';
 import { esc, renderMarkdown, parseLinks } from './content.js';
 
 const app = document.getElementById('app');
-const TABLES = { projects: 'projects', posts: 'blog_posts' };
 const STATUS_LABEL = { live: 'Live', in_progress: 'In development', paused: 'Paused', archived: 'Archived' };
-const SECTION_LABEL = { portfolio: 'Finished projects', current: 'Currently working on' };
+const SECTION_LABEL = { portfolio: 'Finished projects', current: 'Currently working on', creative: '3D work page' };
 const SLUG_RE = /^[a-z0-9-]{1,80}$/;
 const state = { tab: 'projects', rows: [], editingId: null, user: null };
 
 const slugify = (s) => String(s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80);
 const today = () => new Date().toISOString().slice(0, 10);
+const isPost = () => state.tab === 'posts';
+const tableName = () => (isPost() ? 'blog_posts' : 'projects');
+const itemLabel = () => ({ projects: 'project', creative: '3D work item', posts: 'post' })[state.tab];
 const options = (values, selected, labels = {}) =>
   values.map((v) => `<option value="${v}" ${v === selected ? 'selected' : ''}>${esc(labels[v] || v)}</option>`).join('');
 
@@ -67,6 +69,7 @@ function renderShell() {
     <div class="bar">
       <div class="tabs">
         <button data-tab="projects">Projects</button>
+        <button data-tab="creative">3D work</button>
         <button data-tab="posts">Blog posts</button>
       </div>
       <button id="signout" class="ghost">Sign out</button>
@@ -98,26 +101,29 @@ function setContent(html) {
 
 async function loadRows() {
   syncTabs();
-  const query = db.from(TABLES[state.tab]).select('*');
-  const { data, error } = state.tab === 'projects'
-    ? await query.order('sort_order', { ascending: true }).order('created_at', { ascending: false })
-    : await query.order('post_date', { ascending: false });
+  let query = db.from(tableName()).select('*');
+  if (state.tab === 'projects') query = query.neq('section', 'creative');
+  if (state.tab === 'creative') query = query.eq('section', 'creative');
+  const { data, error } = isPost()
+    ? await query.order('post_date', { ascending: false })
+    : await query.order('sort_order', { ascending: true }).order('created_at', { ascending: false });
   if (error) return setStatus(error.message, true);
   state.rows = data ?? [];
   renderList();
 }
 
 function publicHref(row) {
-  return state.tab === 'projects' ? `projects.html#${row.slug}` : `blog/post.html?slug=${row.slug}`;
+  if (state.tab === 'posts') return `blog/post.html?slug=${row.slug}`;
+  if (state.tab === 'creative') return `3d-work.html#${row.slug}`;
+  return `projects.html#${row.slug}`;
 }
 
 function renderList() {
-  const isProjects = state.tab === 'projects';
   const rows = state.rows.map((r) => `
     <div class="row">
       <div>
         <strong>${esc(r.title)}</strong><br>
-        <span class="muted">${esc(isProjects ? `${SECTION_LABEL[r.section]} · ${STATUS_LABEL[r.status]}` : r.post_date)} · ${r.published ? 'published' : 'hidden'}</span>
+        <span class="muted">${esc(isPost() ? r.post_date : `${SECTION_LABEL[r.section]} · ${STATUS_LABEL[r.status]}`)} · ${r.published ? 'published' : 'hidden'}</span>
       </div>
       <div class="row-actions">
         <a href="${esc(publicHref(r))}" target="_blank" rel="noopener">View ↗</a>
@@ -127,7 +133,7 @@ function renderList() {
     </div>`).join('') || '<p class="muted">Nothing here yet.</p>';
 
   setContent(`
-    <div class="bar"><span></span><button id="new">New ${isProjects ? 'project' : 'post'}</button></div>
+    <div class="bar"><span></span><button id="new">New ${itemLabel()}</button></div>
     ${rows}`);
   document.getElementById('new').onclick = () => renderForm(null);
   document.querySelectorAll('[data-edit]').forEach((b) =>
@@ -139,7 +145,7 @@ function renderList() {
 async function remove(id) {
   const row = state.rows.find((r) => r.id === id);
   if (!row || !confirm(`Delete "${row.title}"? This can't be undone.`)) return;
-  const { error } = await db.from(TABLES[state.tab]).delete().eq('id', id);
+  const { error } = await db.from(tableName()).delete().eq('id', id);
   if (error) return setStatus(error.message, true);
   setStatus('Deleted.');
   loadRows();
@@ -147,15 +153,19 @@ async function remove(id) {
 
 function renderForm(row) {
   state.editingId = row?.id ?? null;
-  const isProjects = state.tab === 'projects';
   const v = (key, fallback = '') => esc(row?.[key] ?? fallback);
   const published = row ? row.published : true;
   const linkText = (row?.links || []).map((l) => `${l.label} | ${l.url}`).join('\n');
   const tagText = (row?.tags || []).join(', ');
 
+  // Projects tab chooses a section; the 3D work tab always saves into the 3D work section.
+  const sectionField = state.tab === 'creative'
+    ? '<input type="hidden" name="section" value="creative">'
+    : `<label>Section<select name="section">${options(['portfolio', 'current'], row?.section ?? 'portfolio', SECTION_LABEL)}</select></label>`;
+
   const projectFields = `
     <div class="grid2">
-      <label>Section<select name="section">${options(['portfolio', 'current'], row?.section ?? 'portfolio', SECTION_LABEL)}</select></label>
+      ${sectionField}
       <label>Status<select name="status">${options(['live', 'in_progress', 'paused', 'archived'], row?.status ?? 'live', STATUS_LABEL)}</select></label>
       <label>Small label above the title<input name="kicker" value="${v('kicker')}" placeholder="e.g. IN DEVELOPMENT · UNITY"></label>
       <label>Sort order (lower shows first)<input name="sort_order" type="number" value="${v('sort_order', 0)}"></label>
@@ -169,12 +179,12 @@ function renderForm(row) {
 
   setContent(`
     <form id="editor" class="panel">
-      <h2 style="margin-top:0;border:none;padding:0">${state.editingId ? 'Edit' : 'New'} ${isProjects ? 'project' : 'post'}</h2>
+      <h2 style="margin-top:0;border:none;padding:0">${state.editingId ? 'Edit' : 'New'} ${itemLabel()}</h2>
       <div class="grid2">
         <label>Title<input name="title" required maxlength="160" value="${v('title')}"></label>
         <label>URL slug (optional, made from the title if empty)<input name="slug" maxlength="80" value="${v('slug')}"></label>
       </div>
-      ${isProjects ? projectFields : postFields}
+      ${isPost() ? postFields : projectFields}
       <label>Summary<textarea name="summary" rows="2">${v('summary')}</textarea></label>
       <div class="body-grid">
         <label>Body (Markdown)<textarea name="body" rows="14">${v('body')}</textarea></label>
@@ -241,8 +251,9 @@ async function save(form) {
       cover_url: coverUrl || null,
       published: form.elements.published.checked,
     };
-    const row = state.tab === 'projects'
-      ? {
+    const row = isPost()
+      ? { ...common, post_date: get('post_date') || today() }
+      : {
           ...common,
           section: get('section'),
           status: get('status'),
@@ -251,10 +262,9 @@ async function save(form) {
           links: parseLinks(get('links')),
           tags: get('tags').split(',').map((t) => t.trim()).filter(Boolean),
           sort_order: Number(get('sort_order')) || 0,
-        }
-      : { ...common, post_date: get('post_date') || today() };
+        };
 
-    const table = TABLES[state.tab];
+    const table = tableName();
     const { error } = state.editingId
       ? await db.from(table).update(row).eq('id', state.editingId)
       : await db.from(table).insert(row);
