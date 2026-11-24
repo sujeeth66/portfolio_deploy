@@ -15,13 +15,20 @@
     <a href="projects.html">Projects</a>
     <a href="3d-work.html">3D Work</a>
     <a href="blog/index.html">Blog</a>
-    <a href="resume.pdf">Resume</a>
+    <a href="resume.html">Resume</a>
   </nav>
 </header>
 <main>
   <div class="tag-line">Projects</div>
   <h1>What I've built</h1>
-  <p class="lead">Five projects, listed by how much I'd want you to look at them first.</p>
+  <p class="lead">Finished projects, listed by how much I'd want you to look at them first.</p>
+
+  <section class="current" id="current">
+    <h2>Currently working on</h2>
+    <div id="current-list"><p class="muted">Loading…</p></div>
+  </section>
+
+  <h2>Finished projects</h2>
 
   <div class="card" id="marks">
     <div class="meta">01 · IN USE IN A PILOT</div>
@@ -37,16 +44,16 @@
     <ul>
       <li>A browser extension reads the class metadata, and student roster from the portal.</li>
       <li>A server hosted on Render generates printable marks sheets per subject and reads the completed sheets back.</li>
-      <li>Scanning extracts the handwritten values. Any value with low confidence is highlighted so the teacher can correct it manually.</li>
+      <li>Printed sheets are photographed with AprilTags, and the handwritten values are read with confidence-based OCR. Any value with low confidence is highlighted so the teacher can correct it manually.</li>
       <li>The extracted data is converted to JSON and filled into the portal automatically. I ran it against the real portal.</li>
     </ul>
     <p>Teachers have been using it in a pilot. Their feedback so far is that they can write on the printed sheets without extra time, and the scanning removes the re-typing step. The product is meant to be free for government teachers, and I plan to keep maintaining it.</p>
-    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Browser Extension</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">Render</span><span class="tag">Excel</span></div>
+    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Browser Extension</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">AprilTags</span><span class="tag">Render</span><span class="tag">Excel</span></div>
     <div class="links"><a href="https://github.com/sujeeth66/marks_automation_pipeline_server">GitHub ↗</a> </div>
   </div>
 
   <div class="card" id="rpg">
-    <div class="meta">02 · CAPSTONE (B.TECH) · PROOF OF CONCEPT</div>
+    <div class="meta">03 · CAPSTONE (B.TECH) · PROOF OF CONCEPT</div>
     <h3>Echoloom: Dynamic RPG Game Framework</h3>
     <div class="links"><a href="https://sujeeth66.itch.io/echoloom">Play on itch.io ↗</a></div>
     <p><em>Requires an API key to generate content.</em></p>
@@ -70,19 +77,19 @@
   </div>
 
   <div class="card" id="arm">
-    <div class="meta">03 · HARDWARE + COMPUTER VISION</div>
+    <div class="meta">04 · HARDWARE + COMPUTER VISION</div>
     <h3>3-DOF Robotic Arm</h3>
     <p>My first robot build. I 3D-printed the parts, powered the servos through a 3V AC-to-DC converter, and controlled everything from a Raspberry Pi 3B+.</p>
     <ul>
       <li>No existing library fit the build, so I derived the inverse kinematics myself using the DH parameter method, working through it in Excel.</li>
       <li>I wrote a local Python library that converts target coordinates into servo angles.</li>
-      <li>Two control modes run from a laptop connected to the Pi: hand tracking with computer vision (index finger), and a gamepad joystick.</li>
+      <li>Two control modes run from a laptop connected to the Pi: hand-gesture control using MediaPipe's gesture recognition model with TensorFlow, and a gamepad joystick.</li>
     </ul>
-    <div class="tags"><span class="tag">Raspberry Pi 3B+</span><span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Servo Control</span><span class="tag">Inverse Kinematics</span></div>
+    <div class="tags"><span class="tag">Raspberry Pi 3B+</span><span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">MediaPipe</span><span class="tag">TensorFlow</span><span class="tag">Servo Control</span><span class="tag">Inverse Kinematics</span></div>
   </div>
 
   <div class="card" id="password">
-    <div class="meta">04 · EMBEDDED · ESP32</div>
+    <div class="meta">05 · EMBEDDED · ESP32</div>
     <h3>Dynamic Password Generator</h3>
     <p>A physical device, inspired by a scene in the Telugu film <em>Nanna Ku Prematho</em>. Pressing a button on an ESP32 generates a random one-time password, shows it on an LCD, and expires it after 10 seconds. The password is only visible on the device, so the physical device is part of the security model.</p>
     <ul>
@@ -93,13 +100,22 @@
   </div>
 
   <div class="card" id="zillow">
-    <div class="meta">05 · MACHINE LEARNING · 2ND YEAR</div>
+    <div class="meta">06 · MACHINE LEARNING · 2ND YEAR</div>
     <h3>Zillow Home Value Prediction</h3>
     <p>A regression model that predicts home values. I followed a tutorial for the project structure, then made my own choices on feature selection (for example, that the surrounding area matters more than the color of a multi-floor apartment) and on the model. The project doesn't yet have a documented accuracy or error metric, which I plan to add.</p>
     <div class="tags"><span class="tag">Python</span><span class="tag">Regression</span><span class="tag">Feature Engineering</span></div>
   </div>
+  <section id="extra-section" data-section-wrap hidden>
+    <h2>More projects</h2>
+    <div id="extra-list"></div>
+  </section>
 </main>
 <footer><span>© <span id="year">2026</span> G. Sujeeth Madhav</span><span><a href="index.html">Home</a></span></footer>
 <script src="assets/site.js"></script>
+<script type="module">
+  import { renderSection } from './assets/portfolio.js';
+  renderSection(document.getElementById('current-list'), 'current', { emptyText: 'Nothing here right now.' });
+  renderSection(document.getElementById('extra-list'), 'portfolio', { hideWhenEmpty: true });
+</script>
 </body>
 </html>

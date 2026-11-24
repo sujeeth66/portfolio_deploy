@@ -40,3 +40,15 @@ Then open http://localhost:8000.
 ## Deploying
 
 Push this folder's contents to a repository (for example `yourusername.github.io`), then in Settings → Pages set the source to the `main` branch, root folder.
+
+
+## Admin and database
+
+Projects and blog posts can be added from `/admin.html`, which uses Supabase.
+
+1. Create a Supabase project and run `portfolio_setup.sql` in its SQL Editor.
+2. Put the project URL and anon key in `assets/config.js`. The anon key is public; the database rules protect the data.
+3. In Supabase, add `https://www.sujeethmadhav.com/admin.html` and `http://localhost:8000/admin.html` to Authentication → URL Configuration → Redirect URLs. Enable the Google provider.
+4. Open `/admin.html`, sign in with Google once, then make yourself an admin with the SQL at the end of `portfolio_setup.sql`.
+
+Videos are played from the repo, for example `assets/videos/bixzy.mp4`. Keep video files small, because every change to a file stays in the Git history.

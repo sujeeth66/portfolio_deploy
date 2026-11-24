@@ -5,7 +5,7 @@ Teachers at my father's school kept marks in separate notebooks, one per subject
 1. The browser extension reads the school name, class, section, and student roster from the portal.
 2. The server builds printed marks sheets, one per subject, with four slots per student.
 3. Teachers write marks on the printed sheets. They don't have to change their habits.
-4. The completed sheets are photographed and scanned. The server reads the handwriting.
+4. The completed sheets are photographed with AprilTags and scanned. The server reads the handwriting with confidence-based OCR.
 5. Any value with low confidence is highlighted, so the teacher can correct it by hand.
 6. The data is converted to JSON, and the extension fills the portal.
 

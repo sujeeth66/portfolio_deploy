@@ -15,38 +15,48 @@
     <a href="../projects.html">Projects</a>
     <a href="../3d-work.html">3D Work</a>
     <a href="index.html">Blog</a>
-    <a href="../resume.pdf">Resume</a>
+    <a href="../resume.html">Resume</a>
   </nav>
 </header>
 <main>
   <div class="tag-line">Blog</div>
   <h1>Notes from building</h1>
   <p class="lead">How I built things, what broke, and what I'd do differently.</p>
-  <div class="post-list" id="posts"><p>Loading posts…</p></div>
+  <div class="post-list" id="posts"><p class="muted">Loading posts…</p></div>
 </main>
 <footer><span>© <span id="year">2026</span> G. Sujeeth Madhav</span><span></span></footer>
 <script src="../assets/site.js"></script>
-<script>
-  // Posts are listed in posts/index.json. Entries with "draft": true are hidden.
-  fetch('posts/index.json')
-    .then(r => r.json())
-    .then(posts => {
-      const list = document.getElementById('posts');
-      const visible = posts.filter(p => !p.draft).sort((a, b) => b.date.localeCompare(a.date));
-      if (!visible.length) { list.innerHTML = '<p>No posts yet.</p>'; return; }
-      list.innerHTML = '';
-      visible.forEach(p => {
-        const a = document.createElement('a');
-        a.className = 'post';
-        a.href = 'post.html?slug=' + encodeURIComponent(p.slug);
-        a.innerHTML = '<div class="date"></div><h3></h3><div class="summary"></div>';
-        a.querySelector('.date').textContent = p.date;
-        a.querySelector('h3').textContent = p.title;
-        a.querySelector('.summary').textContent = p.summary;
-        list.appendChild(a);
-      });
-    })
-    .catch(() => { document.getElementById('posts').innerHTML = '<p>Could not load posts.</p>'; });
+<script type="module">
+  // Posts come from two places: posts/index.json (older, in the repo) and the database (added in /admin.html).
+  import { fetchPosts, sortKey, displayDate } from '../assets/portfolio.js';
+  import { esc } from '../assets/content.js';
+
+  const list = document.getElementById('posts');
+  const [staticRes, dbRes] = await Promise.allSettled([
+    fetch('posts/index.json').then(r => r.json()),
+    fetchPosts(),
+  ]);
+
+  if (staticRes.status === 'rejected' && dbRes.status === 'rejected') {
+    list.innerHTML = '<p class="muted">Could not load posts.</p>';
+  } else {
+    const staticPosts = staticRes.status === 'fulfilled' ? staticRes.value.filter(p => !p.draft) : [];
+    const dbPosts = dbRes.status === 'fulfilled' ? dbRes.value : [];
+    const seen = new Set();
+    const all = [];
+    for (const p of [...dbPosts, ...staticPosts]) {
+      if (!seen.has(p.slug)) { seen.add(p.slug); all.push(p); }
+    }
+    all.sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+    list.innerHTML = all.length
+      ? all.map(p => `
+          <a class="post" href="post.html?slug=${encodeURIComponent(p.slug)}">
+            <div class="date">${esc(displayDate(p.date))}</div>
+            <h3>${esc(p.title)}</h3>
+            <div class="summary">${esc(p.summary || '')}</div>
+          </a>`).join('')
+      : '<p class="muted">No posts yet.</p>';
+  }
 </script>
 </body>
 </html>

@@ -37,10 +37,10 @@
       "alternateName": ["G. Sujeeth Madhav"],
       "url": "https://www.sujeethmadhav.com/",
       "image": "https://www.sujeethmadhav.com/assets/profile.jpg",
-      "email": "mailto:sujeethmadhav.ganji@gmail.com",
+      "email": "sujeethmadhav.ganji@gmail.com",
       "jobTitle": "AI & Software Developer",
       "description": "Recent B.Tech CSE (AI & ML) graduate building AI applications, robotics, embedded systems, games and 3D animation.",
-      "knowsAbout": ["Artificial intelligence", "Large language models", "Computer vision", "Robotics", "Embedded systems", "Game development", "Godot", "Python", "JavaScript", "Flask", "3D animation"],
+      "knowsAbout": ["Artificial intelligence", "Large language models", "Computer vision", "Robotics", "Embedded systems", "Game development", "Godot", "Python", "JavaScript", "Flask", "React", "Supabase", "3D animation"],
       "alumniOf": { "@type": "CollegeOrUniversity", "name": "Holy Mary Institute of Technology and Science" },
       "address": { "@type": "PostalAddress", "addressLocality": "Hyderabad", "addressRegion": "Telangana", "addressCountry": "IN" },
       "sameAs": [
@@ -85,9 +85,9 @@
   <p class="lead">B.Tech CSE (AI &amp; ML) graduate, 2026, GPA 8.5/10.0, from Holy Mary Institute of Technology and Science. I work across AI applications, embedded hardware, robotics, and game development, and my deployed tool is in a pilot at a government primary school.</p>
 
   <div class="stats">
-    <div class="stat"><b>5</b><span>Projects built</span></div>
+    <div class="stat"><b>6</b><span>Projects built</span></div>
     <div class="stat"><b>1</b><span>Hackathon-cum-course</span></div>
-    <div class="stat"><b>1</b><span>Live tool in use</span></div>
+    <div class="stat"><b>2</b><span>Live products</span></div>
   </div>
 
   <!-- DOMAINS -->
@@ -106,7 +106,7 @@
     <a class="domain" href="projects.html#arm">
       <div class="meta">ROBOTICS · CV</div>
       <h3>Robotics &amp; computer vision</h3>
-      <p>A 3-DOF arm with inverse kinematics derived by hand, controlled by hand tracking and a gamepad.</p>
+      <p>A 3-DOF arm with inverse kinematics derived by hand, controlled by hand gestures and a gamepad.</p>
     </a>
     <a class="domain" href="projects.html#password">
       <div class="meta">EMBEDDED</div>
@@ -136,8 +136,15 @@
   <div class="card">
     <div class="meta">DEPLOYED · IN USE IN A PILOT</div>
     <h3><a href="projects.html#marks">Marks Automation for a Government Primary School</a></h3>
-    <p>Reads a school's roster from the government portal, builds printed marks sheets, scans the completed sheets, and enters the marks back into the portal. Low-confidence values are highlighted for manual correction.</p>
-    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">Render</span></div>
+    <p>Reads a school's roster from the government portal, builds printed marks sheets, scans the completed sheets (captured with AprilTags, read with confidence-based OCR), and enters the marks back into the portal. Low-confidence values are highlighted for manual correction.</p>
+    <div class="tags"><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">AprilTags</span><span class="tag">Render</span></div>
+  </div>
+  <div class="card">
+    <div class="meta">LIVE · FULL-STACK WEB APP</div>
+    <h3><a href="projects.html#onlycubes">OnlyCubes: Community for 3D Renders and Animations</a></h3>
+    <p>A free art-sharing site with Google sign-in, feeds, comments, follows, remixes, and moderation tools. Built on React, Supabase (PostgreSQL with Row Level Security), and Vercel.</p>
+    <div class="links"><a href="https://onlycubes.sujeethmadhav.com">Visit OnlyCubes ↗</a></div>
+    <div class="tags"><span class="tag">React</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">Vercel</span></div>
   </div>
   <div class="card">
     <div class="meta">CAPSTONE · PROOF OF CONCEPT</div>
@@ -149,8 +156,8 @@
   <div class="card">
     <div class="meta">HARDWARE + CV</div>
     <h3><a href="projects.html#arm">3-DOF Robotic Arm</a></h3>
-    <p>3D-printed arm on a Raspberry Pi 3B+, with a custom inverse-kinematics library and two control modes: hand tracking and a gamepad.</p>
-    <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">OpenCV</span></div>
+    <p>3D-printed arm on a Raspberry Pi 3B+, with a custom inverse-kinematics library and two control modes: MediaPipe and TensorFlow hand-gesture control, and a gamepad.</p>
+    <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">MediaPipe</span><span class="tag">TensorFlow</span></div>
   </div>
   <div class="card">
     <div class="meta">EMBEDDED</div>
@@ -165,15 +172,15 @@
   <div class="skills">
     <div class="skill-group">
       <div class="meta">PROGRAMMING</div>
-      <p>Python · JavaScript · SQL (MySQL) · HTML · Data Structures &amp; Algorithms</p>
+      <p>Python · JavaScript · SQL (MySQL, PostgreSQL) · HTML · CSS · Data Structures &amp; Algorithms</p>
     </div>
     <div class="skill-group">
       <div class="meta">AI / ML</div>
-      <p>LangChain · LLM integration (Groq) · Vector embeddings (HuggingFace) · TensorFlow · OpenCV · AprilTags</p>
+      <p>LangChain · LLM integration (Groq) · Vector embeddings (HuggingFace) · TensorFlow · MediaPipe · OpenCV · AprilTags · OCR</p>
     </div>
     <div class="skill-group">
       <div class="meta">SYSTEMS &amp; TOOLS</div>
-      <p>Flask · Godot / GDScript · Raspberry Pi · ESP32 · Git / GitHub · Browser extension development · Render deployment</p>
+      <p>React · Vite · Supabase · Flask · Godot / GDScript · Raspberry Pi · ESP32 · Git / GitHub · Vercel · Render · Browser extension development</p>
     </div>
   </div>
 
